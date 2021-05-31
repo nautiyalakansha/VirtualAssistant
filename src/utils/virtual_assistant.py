@@ -1,14 +1,9 @@
 import pywhatkit
 import datetime
-import pyjokes
-import random
-import json
-import pyowm
-import re
+
 from src.utils.audio_utility import AudioUtility
 from src.utils.features import Features
-from dotenv import load_dotenv
-import os
+
 
 load_dotenv()
 
@@ -45,21 +40,6 @@ class VirtualAssistant:
                 song = command.split("play")[-1]
                 self.audio.talk(random.choice(self.config_json["statements"]["playing"]) + song)
                 pywhatkit.playonyt(song)
-            elif re.search(r'\b(open)\b', command):
-                command = command.split("open")[-1]
-                self.feature.open_app(command)
-            elif re.search(r'\b(time)\b', command):
-                time = datetime.datetime.now().strftime('%I:%M %p')
-                self.audio.talk('Current time is ' + time)
-            elif re.search(r'\b(joke)\b', command):
-                self.audio.talk(pyjokes.get_joke())
-            elif "go to sleep" in command:
-                self.audio.talk(random.choice(self.config_json["statements"]["sleep"]))
-                return True
-            elif re.search(r'\b(temperature)\b', command):
-                observation = self.owm.weather_manager().weather_at_place("New Delhi").weather.temperature('celsius')[
-                    "temp"]
-                self.audio.talk(str(observation) + " degree celsius")
             elif re.search(r'\b(cases)\b', command) or re.search(r'\b(covid)\b', command):
                 self.audio.talk("for which state you want covid report")
                 command = self.audio.take_command()
@@ -75,9 +55,4 @@ class VirtualAssistant:
             else:
                 self.audio.talk(random.choice(self.config_json["statements"]["command_not_found"]))
 
-    def start_assistant(self):
-        self.audio.talk(self.feature.get_greeting())
-        while True:
-            if self.run_alexa():
-                break
-        self.audio.talk("Thank you")
+    
