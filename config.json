@@ -1,19 +1,11 @@
 {
-  "statements": {
-    "playing": [
-      "playing",
-      "i hope you like the song"
-    ],
+  
+  
     "searching": [
       "searching",
       "looking for",
       "searching online for"
-    ],
-    "date": [
-      "i can go on a date with you,i don't have a heart",
-      "are you sure about that? your IQ is not upto the mark",
-      "Not enough money found in your bank account. Sorry, I can't go on a date."
-    ],
+    
     "choice_not_found": [
       "sorry choice not found",
       "i think that's an invalid choice",
